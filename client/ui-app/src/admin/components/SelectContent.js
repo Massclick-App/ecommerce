@@ -1,0 +1,26 @@
+import * as React from 'react';
+import MuiAvatar from '@mui/material/Avatar';
+import { styled } from '@mui/material/styles';
+
+export default function SelectContent() {
+  return (
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '12px',
+        fontFamily: "'Poppins', sans-serif",
+        fontWeight: 700,
+        fontSize: '1.8rem',
+        color: '#ea6d11',
+        textShadow: '1px 1px 2px rgba(0,0,0,0.2)',
+      }}
+    >
+      <span>
+        Mass<span style={{ color: '#ff9c3b' }}>click</span>
+      </span>
+    </div>
+
+
+  );
+}
