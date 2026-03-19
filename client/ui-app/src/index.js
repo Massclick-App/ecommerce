@@ -11,6 +11,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 import { SnackbarProvider } from 'notistack';
+import { EditorProvider } from 'react-simple-wysiwyg'; // ✅ ADD THIS
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -22,7 +23,12 @@ root.render(
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <App />
+          
+          {/* ✅ FIX HERE */}
+          <EditorProvider>
+            <App />
+          </EditorProvider>
+
         </LocalizationProvider>
       </SnackbarProvider>
     </Provider>

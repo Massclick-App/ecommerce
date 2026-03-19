@@ -33,9 +33,7 @@ export default function SideMenu() {
     { text: "SEO Content", icon: DatasetIcon, path: "/dashboard/seopagecontent" },
     { text: "Users", icon: InterpreterModeIcon, path: "/dashboard/user" },
     { text: "Roles", icon: AdminPanelSettingsIcon, path: "/dashboard/roles" },
-    { text: "Enquiry", icon: TodayIcon, path: "/dashboard/enquiry" },
     { text: "Ads", icon: TodayIcon, path: "/dashboard/advertisements" },
-    { text: "MNI", icon: CorporateFareIcon, path: "/dashboard/mni-data" },
   ];
 
   return (

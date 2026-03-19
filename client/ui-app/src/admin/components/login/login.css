@@ -5,33 +5,33 @@
   --bg-gradient: linear-gradient(135deg, #0B1B4D, #142a6b);
 }
 
-/* BASE */
 body {
   margin: 0;
   font-family: "Inter", sans-serif;
 }
 
-/* BACKGROUND */
 .eco-shell {
-  min-height: 100vh;
+  height: 100vh;   
+  width: 100%;
   background: var(--bg-gradient);
+
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+
+  overflow: hidden;
 }
 
-/* GRID */
 .eco-container {
   width: 100%;
   max-width: 1200px;
   display: grid;
   grid-template-columns: 1fr 420px;
-  gap: 50px;
+  gap: 30px;
   align-items: center;
+
 }
 
-/* LEFT */
 .eco-left {
   color: #fff;
 }
