@@ -28,7 +28,7 @@ export const getAllAdvertise = () => async (dispatch) => {
   dispatch({ type: FETCH_ADVERTISE_REQUEST });
 
   try {
-      const token = await getValidToken(dispatch);
+    const token = await getValidToken(dispatch);
 
     const response = await axios.get(
       `${API_URL}/advertise/viewall`,
@@ -53,7 +53,7 @@ export const createAdvertise = (advertiseData) => async (dispatch) => {
   dispatch({ type: CREATE_ADVERTISE_REQUEST });
 
   try {
-      const token = await getValidToken(dispatch);
+    const token = await getValidToken(dispatch);
 
     const response = await axios.post(
       `${API_URL}/advertise/create`,
@@ -85,7 +85,7 @@ export const editAdvertise = (id, advertiseData) => async (dispatch) => {
   dispatch({ type: EDIT_ADVERTISE_REQUEST });
 
   try {
-      const token = await getValidToken(dispatch);
+    const token = await getValidToken(dispatch);
 
     const response = await axios.put(
       `${API_URL}/advertise/update/${id}`,
@@ -116,7 +116,7 @@ export const deleteAdvertise = (id) => async (dispatch) => {
   dispatch({ type: DELETE_ADVERTISE_REQUEST });
 
   try {
-      const token = await getValidToken(dispatch);
+    const token = await getValidToken(dispatch);
 
     const { data } = await axios.delete(
       `${API_URL}/advertise/delete/${id}`,

@@ -1,136 +1,144 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-const businessSchema = new mongoose.Schema({
+const businessSchema = new mongoose.Schema(
+{
+  clientId: { type: String, default: '', index: true },
 
-  // 🔹 BASIC INFO
-  businessName: { type: String, required: true, index: true },
-  slug: { type: String, unique: true },
-  description: String,
+  businessName: { 
+    type: String, 
+    required: true, 
+    trim: true,
+    index: true 
+  },
 
-  ownerId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  email: { type: String, lowercase: true, trim: true, index: true },
 
-  businessType: {
+  contact: { type: String, index: true },
+
+  contactList: { type: String },
+
+  gstin: { type: String, index: true },
+
+  whatsappNumber: { type: String, required: true, index: true },
+
+  experience: { type: String, required: true },
+
+  businessesLive: { type: Boolean, default: false, index: true },
+
+  location: { type: String, required: true, index: true },
+
+  category: { 
+    type: String, 
+    required: true, 
+    index: true 
+  },
+
+  categorySlug: {
     type: String,
-    enum: ["SELLER", "SERVICE_PROVIDER", "BRAND"],
-    default: "SELLER",
+    index: true
   },
 
-  email: String,
-  contact: String,
-  whatsappNumber: String,
+  categories: [{
+    type: String,
+    index: true
+  }],
+
+  keywords: [{ 
+    type: String,
+    index: true 
+  }],
+
+  keywordsNormalized: [{
+    type: String,
+    index: true
+  }],
+
+  slug: { 
+    type: String, 
+    unique: true, 
+    index: true 
+  },
+
+  seoTitle: { type: String },
+  seoDescription: { type: String },
+
+  title: { type: String },
+  description: { type: String },
+
+  bannerImageKey: { type: String },
+
+  businessImagesKey: [{ type: String }],
+
+  qrCode: {
+    qrText: String,
+    qrImageKey: String,
+    createdAt: Date
+  },
+
   website: String,
+  facebook: String,
+  instagram: String,
+  youtube: String,
+  pinterest: String,
+  twitter: String,
+  linkedin: String,
 
-  address: {
-    plotNumber: String,
-    street: String,
-    city: String,
-    state: String,
-    country: { type: String, default: "India" },
-    pincode: String,
-  },
-
-  geoLocation: {
-    type: { type: String, enum: ["Point"], default: "Point" },
-    coordinates: { type: [Number], index: "2dsphere" },
-  },
-
-  gstin: String,
-  panNumber: String,
-  cinNumber: String,
-
-  logo: String,
-  bannerImage: String,
-  businessImages: [String],
-
-  category: { type: String, index: true },
-  subCategory: String,
-  keywords: [String],
-
-  seo: {
-    title: String,
-    description: String,
-  },
-
-  social: {
-    facebook: String,
-    instagram: String,
-    youtube: String,
-    twitter: String,
-    linkedin: String,
-  },
-
-  subscription: {
-    plan: {
-      type: String,
-      enum: ["FREE", "PREMIUM", "PRO", "ENTERPRISE"],
-      default: "FREE",
-    },
-    isActive: Boolean,
-    startDate: Date,
-    endDate: Date,
-    autoRenew: Boolean,
-  },
+  businessDetails: String,
 
   verification: {
-    status: {
-      type: String,
-      enum: ["PENDING", "VERIFIED", "REJECTED"],
-      default: "PENDING",
+    isVerified: { type: Boolean, default: false, index: true },
+    verifiedBy: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
-    verifiedBy: { type: Schema.Types.ObjectId, ref: "User" },
     verifiedAt: Date,
-  },
-
-  ratings: {
-    average: { type: Number, default: 0 },
-    totalReviews: { type: Number, default: 0 },
+    verificationType: {
+      type: String,
+      enum: ["ADMIN", "DOCUMENT", "AUTO"],
+      default: "ADMIN",
+    },
   },
 
   badges: {
-    isFeatured: Boolean,
-    isTrending: Boolean,
-    isTopSeller: Boolean,
-    priorityScore: { type: Number, default: 0 },
-  },
-
-  logistics: {
-    warehouseAddresses: [{
-      address: String,
-      city: String,
-      country: String,
-      pincode: String,
-    }],
-    shippingType: {
-      type: String,
-      enum: ["SELF", "PLATFORM"],
-      default: "PLATFORM",
-    },
-    returnPolicy: String,
-  },
-
-  payoutDetails: {
-    bankName: String,
-    accountNumber: String,
-    ifscCode: String,
-    accountHolderName: String,
-    upiId: String,
+    isFeatured: { type: Boolean, default: false, index: true },
+    isSponsored: { type: Boolean, default: false, index: true },
+    isTrending: { type: Boolean, default: false, index: true },
+    priorityScore: { type: Number, default: 0, index: true },
   },
 
   analytics: {
-    totalOrders: { type: Number, default: 0 },
-    totalRevenue: { type: Number, default: 0 },
-    totalProducts: { type: Number, default: 0 },
-    conversionRate: { type: Number, default: 0 },
+    views: { type: Number, default: 0 },
+    clicks: { type: Number, default: 0 },
+    leads: { type: Number, default: 0 },
+    lastViewedAt: { type: Date, default: null },
+  },
+  kycDocumentsKey: [{ type: String }],
+  averageRating: { type: Number, default: 0, index: true },
+  activeBusinesses: { type: Boolean, default: true, index: true },
+
+  createdBy: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    index: true
   },
 
-  isActive: { type: Boolean, default: true },
-  isLive: { type: Boolean, default: false },
+  isActive: { type: Boolean, default: true, index: true },
 
-  kycDocuments: [String],
+},
+{
+  timestamps: true
+}
+);
 
-  createdBy: { type: Schema.Types.ObjectId, ref: "User" },
-
-}, { timestamps: true });
+businessSchema.index({
+  businessName: "text",
+  category: "text",
+  keywords: "text",
+  description: "text",
+  title: "text",
+  seoTitle: "text",
+  seoDescription: "text"
+});
 
 export default businessSchema;

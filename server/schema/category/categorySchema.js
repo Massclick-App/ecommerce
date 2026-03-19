@@ -29,14 +29,13 @@ const categorySchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-categorySchema.pre("save", function (next) {
+categorySchema.pre("save", async function () {
   if (this.isModified("category")) {
     this.slug = this.category
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)+/g, "");
   }
-  next();
 });
 
 categorySchema.index({ category: 1 });
